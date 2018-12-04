@@ -30,8 +30,7 @@
         <div class="content">
           <div v-for="(item, index) in originCityData" :key="item.id">
             <div class="province">
-              <input type="checkbox" :id="`province${index}`" v-model="provinceStatus[index]" />
-              <label :for="`province${index}`">{{item.province.shortName}}</label>
+              <label><input type="checkbox" v-model="provinceStatus[index]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
             </div>
             <div class="city">
               <div v-for="cityItem in item.city" :key="cityItem.index" class="city-item">
@@ -95,6 +94,9 @@ export default {
       this.cityStatus.forEach((item, index) => {
         this.$set(this.cityStatus, index, !item)
       })
+      this.provinceStatus.forEach((item, index) => {
+        this.$set(this.provinceStatus, index, !item)
+      })
     },
 
     handleAllStatus (bool) {
@@ -126,16 +128,10 @@ export default {
         }
       })
       this.originCityData = letter === '全部' ? Object.freeze(regions) : Object.freeze(originCityData)
-    }
-  },
-  watch: {
-    provinceStatus (newProvince) {
-      newProvince.forEach((item, index) => {
-        if (this.originCityData[index] && this.originCityData[index].hasOwnProperty('city')) {
-          this.originCityData[index].city.forEach(cityItem => {
-            this.$set(this.cityStatus, cityItem.cityIndex, item)
-          })
-        }
+    },
+    onProvinceChange (item, index, event) {
+      this.originCityData[index].city.forEach(cityItem => {
+        this.$set(this.cityStatus, cityItem.cityIndex, event.target.checked)
       })
     }
   }
@@ -218,6 +214,9 @@ export default {
 
         .clear {
           margin-right: 40px;
+        }
+        .warn {
+          color: #e6a23c;
         }
 
         button {
