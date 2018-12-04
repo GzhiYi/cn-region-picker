@@ -1,9 +1,22 @@
 <template>
   <div class="outer">
     <div class="input-area">
-      <input type="text" @focus="showPicker = true" :value="pickedCity">
+      <input
+        type="text"
+        @focus="showPicker = true"
+        :value="pickedCity"
+        :title="pickedCity"
+      >
     </div>
     <div class="picker" v-if="showPicker">
+      <div class="sort">
+        <span
+          :class="`letter-item ${activeLetter === item ? 'active' : ''}`"
+          v-for="item in letter"
+          :key="item"
+          @click="clickLetter(item)"
+        >{{item}}</span>
+      </div>
       <button @click="handleAllStatus(true)">全选</button>
       <button @click="inverse">反选</button>
       <button @click="handleAllStatus(false)">清空</button>
@@ -24,16 +37,20 @@
 
 <script>
 import city from '../assets/city'
-console.log('city', city)
+const cityLength = 377
+const provinceLength = 34
+
 export default {
   name: 'CnCityPicker',
   data() {
     return {
       showPicker: false,
       originCityData: Object.freeze(city),
-      provinceStatus: [...Array(34)].map(_ => false),
-      cityStatus: [...Array(377)].map(_ => false),
-      pickedCity: ''
+      provinceStatus: [...Array(provinceLength)].map(_ => false),
+      cityStatus: [...Array(cityLength)].map(_ => false),
+      pickedCity: '',
+      letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+      activeLetter: '全部'
     }
   },
   props: {
@@ -56,7 +73,7 @@ export default {
         item.city.forEach((cityItem, index) => {
           if (checkedCity.indexOf(cityItem.cityIndex) !== -1) {
             outPutArr.push(cityItem)
-            this.pickedCity += `${cityItem.name}${index === item.city.length - 1 ? '' : '、'}`
+            this.pickedCity += `${cityItem.name} `
           }
         })
       })
@@ -71,16 +88,44 @@ export default {
     },
 
     handleAllStatus (bool) {
-      this.cityStatus = [...Array(377)].map(_ => bool)
-      this.provinceStatus = [...Array(34)].map(_ => bool)
+      this.cityStatus = [...Array(cityLength)].map(_ => bool)
+      this.provinceStatus = [...Array(provinceLength)].map(_ => bool)
+      if (!bool) {
+        this.pickedCity = ''
+      }
+    },
+
+    clickLetter (letter) {
+      this.activeLetter = letter
+      let originCityData = []
+
+      this.handleAllStatus(false)
+
+      city.forEach(item => {
+        let sortCity = []
+        item.city.forEach(cityItem => {
+          if (cityItem.pinYin[0].toUpperCase() === letter) {
+            sortCity.push(cityItem)
+          }
+        })
+        if (sortCity.length > 0) {
+          originCityData.push({
+            city: sortCity,
+            province: item.province
+          })
+        }
+      })
+      this.originCityData = letter === '全部' ? Object.freeze(city) : Object.freeze(originCityData)
     }
   },
   watch: {
     provinceStatus (newProvince) {
       newProvince.forEach((item, index) => {
-        this.originCityData[index].city.forEach(cityItem => {
-          this.$set(this.cityStatus, cityItem.cityIndex, item)
-        })
+        if (this.originCityData[index] && this.originCityData[index].hasOwnProperty('city')) {
+          this.originCityData[index].city.forEach(cityItem => {
+            this.$set(this.cityStatus, cityItem.cityIndex, item)
+          })
+        }
       })
     }
   }
@@ -88,5 +133,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.letter-item {
+  margin: 4px 6px;
+  cursor: pointer;
+  &.active {
+    background: #7e3f26;
+    color: #fff;
+  }
+}
 </style>
