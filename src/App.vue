@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <cn-city-picker></cn-city-picker>
+    <cn-city-picker
+      @getPickCity="handlePickCity"
+    ></cn-city-picker>
   </div>
 </template>
 
@@ -9,8 +11,14 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      pickCity: ''
     }
+  },
+  methods: {
+    handlePickCity (res) {
+      console.log('res', res)
+      this.pickCity = res
+    },
   }
 }
 </script>
