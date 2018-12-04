@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import city from '../assets/city'
+import regions from '../assets/regions'
 const cityLength = 377
 const provinceLength = 34
 
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       showPicker: false,
-      originCityData: Object.freeze(city),
+      originCityData: Object.freeze(regions),
       provinceStatus: [...Array(provinceLength)].map(_ => false),
       cityStatus: [...Array(cityLength)].map(_ => false),
       pickedCity: '',
@@ -77,7 +77,7 @@ export default {
           }
         })
       })
-      this.$emit('getPickCity', outPutArr)
+      this.$emit('input', outPutArr)
       this.showPicker = false
     },
 
@@ -101,7 +101,7 @@ export default {
 
       this.handleAllStatus(false)
 
-      city.forEach(item => {
+      regions.forEach(item => {
         let sortCity = []
         item.city.forEach(cityItem => {
           if (cityItem.pinYin[0].toUpperCase() === letter) {
@@ -115,7 +115,7 @@ export default {
           })
         }
       })
-      this.originCityData = letter === '全部' ? Object.freeze(city) : Object.freeze(originCityData)
+      this.originCityData = letter === '全部' ? Object.freeze(regions) : Object.freeze(originCityData)
     }
   },
   watch: {

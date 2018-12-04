@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <cn-city-picker
-      @getPickCity="handlePickCity"
+      v-model="pickedCity"
+    ></cn-city-picker>
+
+    <cn-city-picker
+      v-model="pickedCity2"
     ></cn-city-picker>
   </div>
 </template>
@@ -11,15 +15,11 @@ export default {
   name: 'app',
   data () {
     return {
-      pickCity: ''
+      pickedCity: [],
+      pickedCity2: []
     }
   },
-  methods: {
-    handlePickCity (res) {
-      console.log('res', res)
-      this.pickCity = res
-    },
-  }
+  methods: { }
 }
 </script>
 
