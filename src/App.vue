@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <cn-city-picker
+    <cn-region-picker
       v-model="pickedCity"
-    ></cn-city-picker>
+    ></cn-region-picker>
 
-    <cn-city-picker
+    <cn-region-picker
       v-model="pickedCity2"
-    ></cn-city-picker>
+    ></cn-region-picker>
   </div>
 </template>
 

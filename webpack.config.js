@@ -7,8 +7,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'cn-city-picker.js',
-    library: 'cn-city-picker',
+    filename: 'cn-region-picker.js',
+    library: 'cn-region-picker',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

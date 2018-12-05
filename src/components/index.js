@@ -1,5 +1,5 @@
-import CnCityPicker from './cn-city-picker'
+import CnRegionPicker from './cn-region-picker'
 
-CnCityPicker.install = Vue => Vue.component(CnCityPicker.name, CnCityPicker)
+CnRegionPicker.install = Vue => Vue.component(CnRegionPicker.name, CnRegionPicker)
 
-export default CnCityPicker
+export default CnRegionPicker

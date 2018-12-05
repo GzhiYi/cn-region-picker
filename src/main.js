@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import CnCityPicker from './components/index'
+import CnRegionPicker from './components/index'
 
-Vue.use(CnCityPicker)
+Vue.use(CnRegionPicker)
 
 new Vue({
   el: '#app',
