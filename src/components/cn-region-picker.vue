@@ -14,7 +14,7 @@
       <div class="picker">
         <div class="setting">
           <div class="button-area">
-            <button class="clear warn" @click="handleAllStatus(false)">全部清空</button>
+            <button class="clear warn" @click.stop.prevent="handleAllStatus(false)">全部清空</button>
             <button @click.stop.prevent="handleAllStatus(true)">全选</button>
             <button @click.stop.prevent="inverse">反选</button>
             <button @click.stop.prevent="pick">确认</button>
@@ -173,6 +173,7 @@ export default {
       overflow: scroll;
       background-color: #fff;
       border-radius: 8px;
+      line-height: 13px;
       z-index: 1;
 
       .setting {
