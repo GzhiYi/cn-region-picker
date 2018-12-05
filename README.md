@@ -1,18 +1,64 @@
-# cn-city-picker
+![preview](https://images.vrm.cn/2018/12/05/preview.png)
 
-> A city picker.
+# 适用于vue的城市选择组件
 
-## Build Setup
+基本功能：
+1. 支持全选、反选以及全部清空。
+2. 支持按拼音筛选。
+3. 勾选省份将会勾选省份下所有城市。
+
+## 安装
 
 ``` bash
-# install dependencies
-npm install
+npm install cn-region-picker
+# 或者
+yarn add cn-region-picker
+```
+## 用法
 
-# serve with hot reload at localhost:8080
-npm run dev
+组件引入：
+```javascript
+// import包
+import CnRegionPicker from 'cn-region-picker'
 
-# build for production with minification
-npm run build
+// use
+Vue.use(CnRegionPicker)
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+使用：
+```html
+<cn-region-picker
+  v-model="pickCity"
+  placeholder="城市"
+>
+</cn-region-picker>
+
+<!-- 省略代码 -->
+data () {
+  return {
+    pickCity: []
+  }
+}
+```
+选择返回的数据：
+```json
+[{
+  "cityIndex": 37,
+  "id": "210200",
+  "name": "大连市",
+  "pinYin": "dalian",
+  "shortName": "大连"
+}, {
+  "cityIndex": 41,
+  "id": "210600",
+  "name": "丹东市",
+  "pinYin": "dadong",
+  "shortName": "丹东"
+}]
+```
+## 本地运行
+
+```bash
+npm install
+npm run dev
+```
