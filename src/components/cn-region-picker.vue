@@ -6,7 +6,7 @@
         @focus="showPicker = true"
         :value="pickedCity"
         :title="pickedCity"
-        class="pick-input"
+        class="cn-picker-input"
         :placeholder="propsPlaceholder"
       >
     </div>
@@ -141,15 +141,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pick-input {
-  border: 1px solid #c0c4cc;
-  line-height: 30px;
-  cursor: pointer;
-  padding: 0 10px 0 10px;
-  border-radius: 4px;
-  color: #333;
-  text-overflow: ellipsis;
-}
 .picker-bg {
   width: 100%;
   overflow-x: hidden;
@@ -272,6 +263,31 @@ export default {
     & { -ms-overflow-style: none; }
     & { overflow: -moz-scrollbars-none; }
   }
-
 }
 </style>
+<style lang="scss">
+  .cn-picker-input {
+    border: 1px solid #c0c4cc;
+    line-height: 30px;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+    border-radius: 4px;
+    color: #333;
+    text-overflow: ellipsis;
+    margin-right: 20px;
+
+    &::-webkit-input-placeholder {
+      color: #c9ccd8;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: #c9ccd8;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: #c9ccd8;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: #c9ccd8;
+    }
+  }
+</style>
+
