@@ -7,6 +7,7 @@
         :value="pickedCity"
         :title="pickedCity"
         class="pick-input"
+        :placeholder="propsPlaceholder"
       >
     </div>
     <div class="picker-bg" v-show="showPicker">
@@ -14,9 +15,9 @@
         <div class="setting">
           <div class="button-area">
             <button class="clear warn" @click="handleAllStatus(false)">全部清空</button>
-            <button @click="handleAllStatus(true)">全选</button>
-            <button @click="inverse">反选</button>
-            <button @click="pick">确认</button>
+            <button @click.stop.prevent="handleAllStatus(true)">全选</button>
+            <button @click.stop.prevent="inverse">反选</button>
+            <button @click.stop.prevent="pick">确认</button>
           </div>
           <div class="sort">
             <span
@@ -60,12 +61,13 @@ export default {
       pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
+      propsPlaceholder: this.placeholder
     }
   },
   props: {
-    propPickedCity: {
+    placeholder: {
       type: [String],
-      default: ''
+      default: '选择城市'
     }
   },
   methods: {
@@ -209,6 +211,9 @@ export default {
             text-align: left;
           }
         }
+      }
+      .sort {
+        text-align: center;
       }
       .button-area {
         text-align: right;
