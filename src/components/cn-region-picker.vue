@@ -50,7 +50,7 @@ const cityLength = 377
 const provinceLength = 34
 
 export default {
-  name: 'CnCityPicker',
+  name: 'CnRegionPicker',
   data() {
     return {
       showPicker: false,
