@@ -3,10 +3,6 @@
     <cn-region-picker
       v-model="pickedCity"
     ></cn-region-picker>
-
-    <cn-region-picker
-      v-model="pickedCity2"
-    ></cn-region-picker>
   </div>
 </template>
 
@@ -15,8 +11,7 @@ export default {
   name: 'app',
   data () {
     return {
-      pickedCity: [],
-      pickedCity2: []
+      pickedCity: []
     }
   },
   methods: { }

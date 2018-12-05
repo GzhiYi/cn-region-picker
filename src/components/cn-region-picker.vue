@@ -10,38 +10,41 @@
         :placeholder="propsPlaceholder"
       >
     </div>
-    <div class="picker-bg" v-show="showPicker">
-      <div class="picker">
-        <div class="setting">
-          <div class="button-area">
-            <button class="clear warn" @click.stop.prevent="handleAllStatus(false)">全部清空</button>
-            <button @click.stop.prevent="handleAllStatus(true)">全选</button>
-            <button @click.stop.prevent="inverse">反选</button>
-            <button @click.stop.prevent="pick">确认</button>
-          </div>
-          <div class="sort">
-            <span
-              :class="`letter-item ${activeLetter === item ? 'active' : ''}`"
-              v-for="item in letter"
-              :key="item"
-              @click="clickLetter(item)"
-            >{{item}}</span>
-          </div>
-        </div>
-        <div class="content">
-          <div v-for="(item, index) in originCityData" :key="item.id">
-            <div class="province">
-              <label><input type="checkbox" v-model="provinceStatus[index]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
+    <transition name="fade">
+      <div class="picker-bg" v-show="showPicker">
+        <div class="picker">
+          <div class="setting">
+            <div class="button-area">
+              <button class="clear warn color-button" @click.stop.prevent="handleAllStatus(false)">全部清空</button>
+              <button @click.stop.prevent="handleAllStatus(true)">全选</button>
+              <button @click.stop.prevent="inverse">反选</button>
+              <button class="confirm color-button" @click.stop.prevent="pick">确认</button>
             </div>
-            <div class="city">
-              <div v-for="cityItem in item.city" :key="cityItem.index" class="city-item">
-                <label><input type="checkbox" v-model="cityStatus[cityItem.cityIndex]"/>{{cityItem.shortName}}</label>
+            <div class="sort">
+              <span
+                :class="`letter-item ${activeLetter === item ? 'active' : ''}`"
+                v-for="item in letter"
+                :key="item"
+                @click="clickLetter(item)"
+              >{{item}}</span>
+            </div>
+          </div>
+          <div class="content">
+            <div v-for="(item, index) in originCityData" :key="item.id">
+              <div class="province">
+                <label><input type="checkbox" v-model="provinceStatus[index]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
+              </div>
+              <div class="city">
+                <div v-for="cityItem in item.city" :key="cityItem.index" class="city-item">
+                  <label><input type="checkbox" v-model="cityStatus[cityItem.cityIndex]"/>{{cityItem.shortName}}</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
+
   </div>
 </template>
 
@@ -169,13 +172,13 @@ export default {
 
       .setting {
         position: fixed;
-        width: 50%;
+        width: 48%;
         padding: 1%;
         background-color: #fff;
         border-bottom: 1px solid #e5e5e5;
       }
       .content {
-        margin-top: 100px;
+        margin-top: 15%;
         padding: 0 4%;
 
         .province {
@@ -205,7 +208,9 @@ export default {
         }
       }
       .sort {
-        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       .button-area {
         text-align: right;
@@ -215,7 +220,17 @@ export default {
           margin-right: 40px;
         }
         .warn {
-          color: #e6a23c;
+          background-color: #e6a23c;
+          border-color: #e6a23c;
+        }
+        .confirm {
+          background-color: #409eff;
+          border-color: #409eff;
+        }
+        .color-button {
+          color: #fff;
+          font-weight: bold;
+          border: none;
         }
 
         button {
@@ -223,14 +238,10 @@ export default {
           border: 1px solid #dcdfe6;
           outline: none;
           cursor: pointer;
-          padding: 4px 14px;
+          padding: 7px 20px;
           border-radius: 4px;
           border-color: #dcdfe6;
           color: #595a5e;
-
-          &.active {
-            background: red;
-          }
         }
       }
       .letter-item {
@@ -241,6 +252,7 @@ export default {
         border-radius: 4px;
         cursor: pointer;
         margin: 0 3px;
+        transition: .3s all;
 
         &.active {
           background-color: #337ab7;
@@ -288,6 +300,12 @@ export default {
     &:-moz-placeholder { /* Firefox 18- */
       color: #c9ccd8;
     }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
 
