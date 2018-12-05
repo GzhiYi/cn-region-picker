@@ -152,13 +152,14 @@ export default {
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   outline: 0;
   background: #000000a1;
+  z-index: 9999;
 
   .picker {
       width: 50%;
@@ -174,7 +175,7 @@ export default {
 
       .setting {
         position: fixed;
-        width: 48%;
+        width: 50%;
         padding: 1%;
         background-color: #fff;
         border-bottom: 1px solid #e5e5e5;
@@ -191,6 +192,7 @@ export default {
 
           label {
             font-size: 14px;
+            font-weight: bold;
           }
         }
         .city {
