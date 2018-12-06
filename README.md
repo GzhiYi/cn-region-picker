@@ -4,6 +4,8 @@
 
 # 适用于vue的城市选择组件
 
+[在线Demo](http://gzhiyi.top/cn-region-picker/)
+
 基本功能：
 
 1. 支持全选、反选以及全部清空。
