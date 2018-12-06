@@ -172,6 +172,9 @@ export default {
 
       .setting {
         position: fixed;
+        left: 0;
+        right: 0;
+        margin: auto;
         width: 48%;
         padding: 1%;
         background-color: #fff;
