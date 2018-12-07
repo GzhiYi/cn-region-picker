@@ -4,7 +4,7 @@
 
 # 适用于vue的城市选择组件
 
-[在线Demo](http://gzhiyi.top/cn-region-picker/)
+[在线Demo](https://gzhiyi.top/cn-region-picker/)
 
 基本功能：
 
