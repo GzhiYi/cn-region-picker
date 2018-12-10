@@ -7,6 +7,11 @@
   <body>
     <div id="app">
       <cn-region-picker v-model="pickCity"></cn-region-picker>
+      <div class="pick-result">
+        <pre>
+          {{JSON.stringify(pickCity, null, ' ')}}
+        </pre>
+      </div>
     </div>
 
     <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.min.js"></script>

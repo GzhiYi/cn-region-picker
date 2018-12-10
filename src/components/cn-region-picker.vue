@@ -10,7 +10,7 @@
         :placeholder="propsPlaceholder"
         :style="`width: ${propsInputWidth}px;`"
       >
-      <img v-if="propsShowClose" class="input-close" :src="closePng" alt="清空" @click.stop.prevent="handleAllStatus(false)">
+      <span class="input-close" v-if="propsShowClose" @click.stop.prevent="handleAllStatus(false)"></span>
     </div>
     <transition name="fade">
       <div class="picker-bg" v-show="showPicker" @click.stop.self="closeModalPicker"><!-- 此处不能prevent -->
@@ -21,7 +21,7 @@
               <button @click.stop.prevent="handleAllStatus(true)">全选</button>
               <button @click.stop.prevent="inverse">反选</button>
               <button class="confirm color-button" @click.stop.prevent="pick">确认</button>
-              <img class="close" @click.stop.prevent="showPicker = false" :src="closePng" alt="关闭">
+              <div class="close" @click.stop.prevent="showPicker = false"></div>
             </div>
             <div class="sort">
               <span
@@ -53,7 +53,6 @@
 
 <script>
 import regions from '../assets/regions'
-import closePng from '../assets/close.png'
 
 const cityLength = regions[regions.length - 1].city[regions[regions.length - 1].city.length - 1].cityIndex + 1
 const provinceLength = regions[regions.length - 1].province.provinceIndex + 1
@@ -69,7 +68,6 @@ export default {
       pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
-      closePng: closePng,
 
       propsPlaceholder: this.placeholder,
       propsShowClose: this.showClose,
@@ -181,11 +179,31 @@ export default {
 <style lang="scss" scoped>
 .outer {
   .input-close {
-    width: 10px;
-    height: 10px;
     position: relative;
-    left: -22px;
+    right: 30px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
     cursor: pointer;
+    transition: .3s all;
+  }
+  .input-close:hover {
+    opacity: 1;
+  }
+  .input-close:before, .input-close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 14px;
+    width: 1px;
+    background-color: #333;
+  }
+  .input-close:before {
+    transform: rotate(45deg);
+  }
+  .input-close:after {
+    transform: rotate(-45deg);
   }
 }
 .picker-bg {
@@ -262,6 +280,7 @@ export default {
       .button-area {
         text-align: right;
         margin-bottom: 12px;
+        padding-right: 40px;
 
         .clear {
           margin-right: 40px;
@@ -279,12 +298,31 @@ export default {
           border: none;
         }
         .close {
-          width: 14px;
-          height: 14px;
-          margin: -3px;
-          margin-left: 30px;
-          margin-right: 7px;
+          position: absolute;
+          right: 9px;
+          top: 24px;
+          width: 32px;
+          height: 32px;
+          opacity: 0.3;
           cursor: pointer;
+          transition: .3s all;
+        }
+        .close:hover {
+          opacity: 1;
+        }
+        .close:before, .close:after {
+          position: absolute;
+          left: 15px;
+          content: ' ';
+          height: 16px;
+          width: 2px;
+          background-color: #333;
+        }
+        .close:before {
+          transform: rotate(45deg);
+        }
+        .close:after {
+          transform: rotate(-45deg);
         }
 
         button {

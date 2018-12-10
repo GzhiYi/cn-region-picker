@@ -2,7 +2,7 @@
   "name": "cn-region-picker",
   "description": "Vue可用城市选择组件。",
   "keywords": ["vue", "component", "city-picker", "城市选择", "组件"],
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "GzhiYi <gzy.guy@gmail.com>",
   "license": "MIT",
   "repository": {
