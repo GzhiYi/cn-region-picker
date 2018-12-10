@@ -10,7 +10,7 @@
         :placeholder="propsPlaceholder"
         :style="`width: ${propsInputWidth}px;`"
       >
-      <img v-if="propsShowClose" class="input-close" src="../assets/close.png" alt="清空" @click.stop.prevent="handleAllStatus(false)">
+      <img v-if="propsShowClose" class="input-close" :src="closePng" alt="清空" @click.stop.prevent="handleAllStatus(false)">
     </div>
     <transition name="fade">
       <div class="picker-bg" v-show="showPicker" @click.stop.self="closeModalPicker"><!-- 此处不能prevent -->
@@ -21,7 +21,7 @@
               <button @click.stop.prevent="handleAllStatus(true)">全选</button>
               <button @click.stop.prevent="inverse">反选</button>
               <button class="confirm color-button" @click.stop.prevent="pick">确认</button>
-              <img class="close" @click.stop.prevent="showPicker = false" src="../assets/close.png" alt="关闭">
+              <img class="close" @click.stop.prevent="showPicker = false" :src="closePng" alt="关闭">
             </div>
             <div class="sort">
               <span
@@ -53,6 +53,7 @@
 
 <script>
 import regions from '../assets/regions'
+import closePng from '../assets/close.png'
 
 const cityLength = regions[regions.length - 1].city[regions[regions.length - 1].city.length - 1].cityIndex + 1
 const provinceLength = regions[regions.length - 1].province.provinceIndex + 1
@@ -68,6 +69,7 @@ export default {
       pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
+      closePng: closePng,
 
       propsPlaceholder: this.placeholder,
       propsShowClose: this.showClose,
