@@ -6,13 +6,14 @@
         @focus="showPicker = true"
         :value="pickedCity"
         :title="pickedCity"
-        class="cn-picker-input"
+        :class="`${propsInputClass || 'cn-picker-input'}`"
         :placeholder="propsPlaceholder"
+        :style="`width: ${propsInputWidth}px;`"
       >
       <img v-if="propsShowClose" class="input-close" src="../assets/close.png" alt="清空" @click.stop.prevent="handleAllStatus(false)">
     </div>
     <transition name="fade">
-      <div class="picker-bg" v-show="showPicker" @click.stop.prevent.self="closeModalPicker">
+      <div class="picker-bg" v-show="showPicker" @click.stop.self="closeModalPicker"><!-- 此处不能prevent -->
         <div class="picker">
           <div class="setting">
             <div class="button-area">
@@ -66,9 +67,12 @@ export default {
       pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
+
       propsPlaceholder: this.placeholder,
       propsShowClose: this.showClose,
-      propsClickModalClose: this.clickModal
+      propsClickModalClose: this.clickModal,
+      propsInputClass: this.inputClass,
+      propsInputWidth: this.inputWidth
     }
   },
   props: {
@@ -83,6 +87,14 @@ export default {
     clickModal: {
       type: [Boolean],
       default: true
+    },
+    inputClass: {
+      type: [String],
+      default: null
+    },
+    inputWidth: {
+      type: [Number],
+      default: 200
     }
   },
   methods: {
