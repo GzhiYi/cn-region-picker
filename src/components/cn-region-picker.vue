@@ -53,8 +53,9 @@
 
 <script>
 import regions from '../assets/regions'
-const cityLength = 377
-const provinceLength = 34
+
+const cityLength = regions[regions.length - 1].city[regions[regions.length - 1].city.length - 1].cityIndex + 1
+const provinceLength = regions[regions.length - 1].province.provinceIndex + 1
 
 export default {
   name: 'CnRegionPicker',
@@ -72,7 +73,8 @@ export default {
       propsShowClose: this.showClose,
       propsClickModalClose: this.clickModal,
       propsInputClass: this.inputClass,
-      propsInputWidth: this.inputWidth
+      propsInputWidth: this.inputWidth,
+      propsRegions: this.regions
     }
   },
   props: {
