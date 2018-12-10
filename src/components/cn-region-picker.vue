@@ -9,9 +9,10 @@
         class="cn-picker-input"
         :placeholder="propsPlaceholder"
       >
+      <img v-if="propsShowClose" class="input-close" src="../assets/close.png" alt="清空" @click.stop.prevent="handleAllStatus(false)">
     </div>
     <transition name="fade">
-      <div class="picker-bg" v-show="showPicker">
+      <div class="picker-bg" v-show="showPicker" @click.stop.prevent.self="closeModalPicker">
         <div class="picker">
           <div class="setting">
             <div class="button-area">
@@ -19,6 +20,7 @@
               <button @click.stop.prevent="handleAllStatus(true)">全选</button>
               <button @click.stop.prevent="inverse">反选</button>
               <button class="confirm color-button" @click.stop.prevent="pick">确认</button>
+              <img class="close" @click.stop.prevent="showPicker = false" src="../assets/close.png" alt="关闭">
             </div>
             <div class="sort">
               <span
@@ -64,13 +66,23 @@ export default {
       pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
-      propsPlaceholder: this.placeholder
+      propsPlaceholder: this.placeholder,
+      propsShowClose: this.showClose,
+      propsClickModalClose: this.clickModal
     }
   },
   props: {
     placeholder: {
       type: [String],
       default: '选择城市'
+    },
+    showClose: {
+      type: [Boolean],
+      default: true
+    },
+    clickModal: {
+      type: [Boolean],
+      default: true
     }
   },
   methods: {
@@ -134,16 +146,32 @@ export default {
       })
       this.originCityData = letter === '全部' ? Object.freeze(regions) : Object.freeze(originCityData)
     },
+
     onProvinceChange (item, index, event) {
       this.originCityData[index].city.forEach(cityItem => {
         this.$set(this.cityStatus, cityItem.cityIndex, event.target.checked)
       })
+    },
+
+    closeModalPicker () {
+      if (this.propsClickModalClose) {
+        this.showPicker = false
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.outer {
+  .input-close {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    left: -22px;
+    cursor: pointer;
+  }
+}
 .picker-bg {
   width: 100%;
   overflow-x: hidden;
@@ -163,7 +191,7 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
-      margin: 30px auto;
+      margin: 4% auto;
       overflow: scroll;
       background-color: #fff;
       border-radius: 8px;
@@ -223,8 +251,8 @@ export default {
           margin-right: 40px;
         }
         .warn {
-          background-color: #e6a23c;
-          border-color: #e6a23c;
+          background-color: #6c757d;
+          border-color: #6c757d;
         }
         .confirm {
           background-color: #409eff;
@@ -232,8 +260,15 @@ export default {
         }
         .color-button {
           color: #fff;
-          font-weight: bold;
           border: none;
+        }
+        .close {
+          width: 14px;
+          height: 14px;
+          margin: -3px;
+          margin-left: 30px;
+          margin-right: 7px;
+          cursor: pointer;
         }
 
         button {
@@ -285,11 +320,11 @@ export default {
     border: 1px solid #c0c4cc;
     line-height: 30px;
     cursor: pointer;
-    padding: 0 10px 0 10px;
+    padding: 0 20px 0 10px;
     border-radius: 4px;
     color: #333;
     text-overflow: ellipsis;
-    margin-right: 20px;
+    outline: none;
 
     &::-webkit-input-placeholder {
       color: #c9ccd8;

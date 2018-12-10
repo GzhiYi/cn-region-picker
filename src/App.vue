@@ -2,6 +2,7 @@
   <div id="app">
     <cn-region-picker
       v-model="pickedCity"
+      :showClose="true"
     ></cn-region-picker>
   </div>
 </template>
