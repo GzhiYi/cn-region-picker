@@ -35,11 +35,18 @@
           <div class="content">
             <div v-for="(item, index) in originCityData" :key="item.id">
               <div class="province">
-                <label><input type="checkbox" v-model="provinceStatus[item.province.provinceIndex]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
+                <label>
+                  <img
+                    class="check-box"
+                    :src="`${provinceStatus[item.province.provinceIndex] ? 'https://images.vrm.cn/2018/12/21/checked.png' : 'https://images.vrm.cn/2018/12/21/unchecked.png'}`"
+                  ><input type="checkbox" v-model="provinceStatus[item.province.provinceIndex]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
               </div>
               <div class="city">
                 <div v-for="cityItem in item.city" :key="cityItem.index" class="city-item">
-                  <label><input type="checkbox" v-model="cityStatus[cityItem.cityIndex]"/>{{cityItem.shortName}}</label>
+                  <label><img
+                    class="check-box"
+                    :src="`${cityStatus[cityItem.cityIndex] ? 'https://images.vrm.cn/2018/12/21/checked.png' : 'https://images.vrm.cn/2018/12/21/unchecked.png'}`"
+                  ><input type="checkbox" v-model="cityStatus[cityItem.cityIndex]"/>{{cityItem.shortName}}</label>
                 </div>
               </div>
             </div>
@@ -194,7 +201,7 @@ export default {
     left: 15px;
     content: ' ';
     height: 14px;
-    width: 1px;
+    width: 2px;
     background-color: #333;
   }
   .input-close:before {
@@ -239,6 +246,7 @@ export default {
         padding: 1%;
         background-color: #fff;
         border-bottom: 1px solid #e5e5e5;
+        z-index: 99;
       }
       .content {
         margin-top: 15%;
@@ -360,11 +368,19 @@ export default {
     input[type="checkbox"] {
       width: 13px;
       height: 13px;
+      opacity: 0;
       vertical-align: middle;
+      margin-right: 5px;
     }
     &::-webkit-scrollbar { width: 0 !important }
     & { -ms-overflow-style: none; }
     & { overflow: -moz-scrollbars-none; }
+  }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    margin-top: -1px;
   }
 }
 </style>
