@@ -35,7 +35,7 @@
           <div class="content">
             <div v-for="(item, index) in originCityData" :key="item.id">
               <div class="province">
-                <label><input type="checkbox" v-model="provinceStatus[index]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
+                <label><input type="checkbox" v-model="provinceStatus[item.province.provinceIndex]" @change="onProvinceChange(item, index, $event)"/>{{item.province.shortName}}</label>
               </div>
               <div class="city">
                 <div v-for="cityItem in item.city" :key="cityItem.index" class="city-item">
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     pick () {
-      let checkedCity = []
+      let checkedCity = [] // 勾选的城市index
       let outPutArr = []
       this.pickedCity = ''
       this.cityStatus.forEach((cityItem, index) => {
@@ -109,7 +109,7 @@ export default {
           checkedCity.push(index)
         }
       })
-      this.originCityData.forEach(item => {
+      regions.forEach(item => {
         item.city.forEach((cityItem, index) => {
           if (checkedCity.indexOf(cityItem.cityIndex) !== -1) {
             outPutArr.push(cityItem)
@@ -141,8 +141,6 @@ export default {
     clickLetter (letter) {
       this.activeLetter = letter
       let originCityData = []
-
-      this.handleAllStatus(false)
 
       regions.forEach(item => {
         let sortCity = []
@@ -334,6 +332,7 @@ export default {
           border-radius: 4px;
           border-color: #dcdfe6;
           color: #595a5e;
+          margin-right: 12px;
         }
       }
       .letter-item {
