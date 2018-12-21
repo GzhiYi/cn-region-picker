@@ -1,5 +1,5 @@
 <div  align="center">
-  <img src="https://images.vrm.cn/2018/12/05/preview.png" width = "620" height = "500" alt="preview" align=center />
+  <img src="https://images.vrm.cn/2018/12/21/TIM截图20181221111148.png" width = "620" height = "500" alt="preview" align=center />
 </div>
 
 # 适用于vue的城市选择组件
@@ -98,9 +98,8 @@ npm run dev
 2. 增加输入框样式替换、增加输入框宽度属性。
 3. 增加点击遮罩关闭事件。
 
-#### (Ready) 1.1.4
+#### 1.1.4
 
-- [ ] bug：字母选择会重置勾选项的问题。
-- [ ] input框关闭图标难点击。
-- [ ] checkbox样式。
-- [ ] 支持自定义地区数据。
+1. 修复bug：字母选择会重置勾选项的问题。
+2. 增加input框关闭图标大小。
+3. 更新checkbox样式。
