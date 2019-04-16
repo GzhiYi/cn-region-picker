@@ -1,6 +1,6 @@
 <template>
   <div class="outer">
-    <div class="input-area">
+    <div class="input-area" :style="`width: ${propsInputWidth + 30}px;`">
       <input
         type="text"
         @focus="showPicker = true"
@@ -177,15 +177,29 @@ export default {
         this.showPicker = false
       }
     }
+  },
+  mounted () {
+    const defaultValue = this.$attrs.value
+    if (defaultValue && defaultValue instanceof Array) {
+      let pickedCity = ''
+      defaultValue.forEach(city => {
+        pickedCity += `${city.name} `
+        this.cityStatus[city.cityIndex] = true
+      })
+      this.pickedCity = pickedCity
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .outer {
-  .input-close {
+  .input-area {
     position: relative;
-    right: 30px;
+  }
+  .input-close {
+    position: absolute;
+    right: 0;
     top: 8px;
     width: 32px;
     height: 32px;
@@ -287,6 +301,7 @@ export default {
         text-align: right;
         margin-bottom: 12px;
         padding-right: 40px;
+        position: relative;
 
         .clear {
           margin-right: 40px;
@@ -305,8 +320,8 @@ export default {
         }
         .close {
           position: absolute;
-          right: 9px;
-          top: 24px;
+          right: 1px;
+          top: 9px;
           width: 32px;
           height: 32px;
           opacity: 0.3;
