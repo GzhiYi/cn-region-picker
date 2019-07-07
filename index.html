@@ -6,7 +6,11 @@
   </head>
   <body>
     <div id="app">
-      <cn-region-picker v-model="pickCity"></cn-region-picker>
+      <cn-region-picker
+      :pickedCity="pickedCity"
+      @on-pick-city="pickedCity = $event"
+      :showClose="true"
+    ></cn-region-picker>
       <div class="pick-result">
         <pre>
           {{JSON.stringify(pickCity, null, ' ')}}

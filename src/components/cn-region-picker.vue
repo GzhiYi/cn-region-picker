@@ -4,8 +4,8 @@
       <input
         type="text"
         @focus="showPicker = true"
-        :value="pickedCity"
-        :title="pickedCity"
+        :value="showPickedCity"
+        :title="showPickedCity"
         :class="`${propsInputClass || 'cn-picker-input'}`"
         :placeholder="propsPlaceholder"
         :style="`width: ${propsInputWidth}px;`"
@@ -72,10 +72,9 @@ export default {
       originCityData: Object.freeze(regions),
       provinceStatus: [...Array(provinceLength)].map(_ => false),
       cityStatus: [...Array(cityLength)].map(_ => false),
-      pickedCity: '',
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
-
+      pickData: [],
       propsPlaceholder: this.placeholder,
       propsShowClose: this.showClose,
       propsClickModalClose: this.clickModal,
@@ -104,13 +103,15 @@ export default {
     inputWidth: {
       type: [Number],
       default: 200
+    },
+    pickedCity: {
+      type: Array
     }
   },
   methods: {
     pick () {
       let checkedCity = [] // 勾选的城市index
       let outPutArr = []
-      this.pickedCity = ''
       this.cityStatus.forEach((cityItem, index) => {
         if (cityItem) {
           checkedCity.push(index)
@@ -120,11 +121,11 @@ export default {
         item.city.forEach((cityItem, index) => {
           if (checkedCity.indexOf(cityItem.cityIndex) !== -1) {
             outPutArr.push(cityItem)
-            this.pickedCity += `${cityItem.name} `
           }
         })
       })
-      this.$emit('input', outPutArr)
+      this.$emit('on-pick-city', outPutArr)
+      this.pickData = outPutArr
       this.showPicker = false
     },
 
@@ -141,7 +142,7 @@ export default {
       this.cityStatus = [...Array(cityLength)].map(_ => bool)
       this.provinceStatus = [...Array(provinceLength)].map(_ => bool)
       if (!bool) {
-        this.pickedCity = ''
+        this.pickData = []
       }
     },
 
@@ -178,15 +179,21 @@ export default {
       }
     }
   },
-  mounted () {
-    const defaultValue = this.$attrs.value
-    if (defaultValue && defaultValue instanceof Array) {
-      let pickedCity = ''
-      defaultValue.forEach(city => {
-        pickedCity += `${city.name} `
+  computed: {
+    showPickedCity() {
+      let result = ''
+      this.pickData.forEach(city => {
         this.cityStatus[city.cityIndex] = true
+        result += `${city.name} `
       })
-      this.pickedCity = pickedCity
+      return result
+    }
+  },
+  watch: {
+    pickedCity: {
+      handler(newOne) {
+        this.pickData = newOne
+      }
     }
   }
 }

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <cn-region-picker
-      v-model="pickedCity"
+      :pickedCity="pickedCity"
+      @on-pick-city="pickedCity = $event"
       :showClose="true"
     ></cn-region-picker>
   </div>
@@ -15,7 +16,12 @@ export default {
       pickedCity: []
     }
   },
-  methods: { }
+  methods: {
+    onPickCity(value) {
+      console.log('选择的数据', value)
+    }
+  },
+  created() {}
 }
 </script>
 
