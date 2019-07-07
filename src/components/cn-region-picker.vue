@@ -1,16 +1,16 @@
 <template>
   <div class="outer">
-    <div class="input-area" :style="`width: ${propsInputWidth + 30}px;`">
+    <div class="input-area" :style="`width: ${width + 30}px;`">
       <input
         type="text"
         @focus="showPicker = true"
         :value="showPickedCity"
         :title="showPickedCity"
-        :class="`${propsInputClass || 'cn-picker-input'}`"
-        :placeholder="propsPlaceholder"
-        :style="`width: ${propsInputWidth}px;`"
+        :class="`${inputClass || 'cn-picker-input'}`"
+        :placeholder="placeholder"
+        :style="`width: ${width}px;`"
       >
-      <span class="input-close" v-if="propsShowClose" @click.stop.prevent="handleAllStatus(false)"></span>
+      <span class="input-close" v-if="showCloseBtn" @click.stop.prevent="handleAllStatus(false)"></span>
     </div>
     <transition name="fade">
       <div class="picker-bg" v-show="showPicker" @click.stop.self="closeModalPicker"><!-- 此处不能prevent -->
@@ -75,12 +75,6 @@ export default {
       letter: ["全部", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       activeLetter: '全部',
       pickData: [],
-      propsPlaceholder: this.placeholder,
-      propsShowClose: this.showClose,
-      propsClickModalClose: this.clickModal,
-      propsInputClass: this.inputClass,
-      propsInputWidth: this.inputWidth,
-      propsRegions: this.regions
     }
   },
   props: {
@@ -88,7 +82,7 @@ export default {
       type: [String],
       default: '选择城市'
     },
-    showClose: {
+    showCloseBtn: {
       type: [Boolean],
       default: true
     },
@@ -100,7 +94,7 @@ export default {
       type: [String],
       default: null
     },
-    inputWidth: {
+    width: {
       type: [Number],
       default: 200
     },
@@ -174,7 +168,7 @@ export default {
     },
 
     closeModalPicker () {
-      if (this.propsClickModalClose) {
+      if (this.clickModal) {
         this.showPicker = false
       }
     }

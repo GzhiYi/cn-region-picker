@@ -3,7 +3,7 @@
     <cn-region-picker
       :pickedCity="pickedCity"
       @on-pick-city="pickedCity = $event"
-      :showClose="true"
+      :showCloseBtn="true"
     ></cn-region-picker>
   </div>
 </template>
