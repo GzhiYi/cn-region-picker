@@ -13,7 +13,7 @@
     ></cn-region-picker>
       <div class="pick-result">
         <pre>
-          {{JSON.stringify(pickCity, null, ' ')}}
+          {{JSON.stringify(pickedCity, null, ' ')}}
         </pre>
       </div>
     </div>
@@ -25,7 +25,7 @@
         el: '#app',
         data() {
           return {
-            pickCity: []
+            pickedCity: []
           }
         }
       })
