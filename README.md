@@ -34,7 +34,7 @@ Vue.use(CnRegionPicker)
 ```html
 <cn-region-picker
   v-model="pickCity"
-  placeholder="城市"
+  @on-pick-city="pickedCity = $event"
 >
 </cn-region-picker>
 
@@ -69,10 +69,16 @@ data () {
 | 参数       | 说明    |  类型  |  默认值  |
 | --------   | -----   | ---- |  ----  |
 | placeholder| -    | String | 选择城市 |
-| showClose| 是否显示input框清空按钮   | Boolean | true |
+| showCloseBtn| 是否显示input框清空按钮   | Boolean | true |
 | clickModal| 是否点击遮罩关闭弹层   | Boolean | true |
 | inputClass| 替换预设的输入框样式   | String | null |
-| inputWidth| input框宽度   | Number | 200 |
+| width| input框宽度   | Number | 200 |
+
+## 事件
+
+| 事件      | 说明    | 参数  |
+| --------   | -----   | ---- |
+| on-pick-city|城市选择的回调事件|勾选的城市|
 
 ## 本地运行
 
