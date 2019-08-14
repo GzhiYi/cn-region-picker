@@ -188,6 +188,14 @@ export default {
       handler(newOne) {
         this.pickData = newOne
       }
+    },
+    pickData: {
+      handler(newOne) {
+        newOne.forEach(city => {
+          this.cityStatus[city.cityIndex] = true
+          this.showPickedCity += `${city.name} `
+        })
+      }
     }
   }
 }
