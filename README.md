@@ -86,3 +86,6 @@ data () {
 npm install
 npm run dev
 ```
+
+运行出现错误，可以看这个issue，移除对应这部分代码就可以了。]
+[戳](https://github.com/GzhiYi/cn-region-picker/issues/3#issuecomment-519342892)
