@@ -12,7 +12,7 @@
 ## 安装
 
 ``` bash
-npm install cn-region-picker
+npm install cn-region-picker --save
 # 或者
 yarn add cn-region-picker
 ```
