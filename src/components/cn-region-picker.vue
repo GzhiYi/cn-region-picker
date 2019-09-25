@@ -162,7 +162,6 @@ export default {
           }
         });
       });
-      console.log('lalalla', outPutArr)
       this.$emit("on-pick-city", outPutArr);
       this.pickData = outPutArr;
       this.showPicker = false;
